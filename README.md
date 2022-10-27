@@ -104,7 +104,7 @@ protoc \
 All messages generated include the following methods:
 - `Validate() error` which returns the first error encountered during validation.
 - `ValidateAll() error` which returns all errors encountered during validation.
-  
+
 PGV requires no additional runtime dependencies from the existing generated code.
 
 **Note**: by default **example.pb.validate.go** is nested in a directory structure that matches your `option go_package` name. You can change this using the protoc parameter `paths=source_relative:.`. Then `--validate_out` will output the file where it is expected. See Google's protobuf documentation or [packages and input paths](https://github.com/golang/protobuf#packages-and-input-paths) or [parameters](https://github.com/golang/protobuf#parameters) for more information.
@@ -201,12 +201,12 @@ serverBuilder.addService(ServerInterceptors.intercept(svc, new ValidatingServerI
 #### Python
 
 The python implementation works via JIT code generation. In other words, the `validate(msg)` function is written
-on-demand and [exec-ed](https://docs.python.org/3/library/functions.html#exec). An LRU-cache improves performance by 
-storing generated functions per descriptor. 
- 
+on-demand and [exec-ed](https://docs.python.org/3/library/functions.html#exec). An LRU-cache improves performance by
+storing generated functions per descriptor.
+
 The python package is available on [PyPI](https://pypi.org/project/protoc-gen-validate).
 
-To run `validate()`, do the following: 
+To run `validate()`, do the following:
 ```python
 from entities_pb2 import Person
 from protoc_gen_validate.validator import validate, ValidationFailed
@@ -335,7 +335,7 @@ Check the [constraint rule comparison matrix](rule_comparison.md) for language-s
 
   // x must contain "baz" anywhere inside it
   string x = 1 [(validate.rules).string.contains = "baz"];
-  
+
   // x cannot contain "baz" anywhere inside it
   string x = 1 [(validate.rules).string.not_contains = "baz"];
 
@@ -393,13 +393,13 @@ Check the [constraint rule comparison matrix](rule_comparison.md) for language-s
 
   // x must be a valid UUID (via RFC 4122)
   string x = 1 [(validate.rules).string.uuid = true];
-  
+
   // x must conform to a well known regex for HTTP header names (via RFC 7230)
   string x = 1 [(validate.rules).string.well_known_regex = HTTP_HEADER_NAME]
-  
-  // x must conform to a well known regex for HTTP header values (via RFC 7230) 
+
+  // x must conform to a well known regex for HTTP header values (via RFC 7230)
   string x = 1 [(validate.rules).string.well_known_regex = HTTP_HEADER_VALUE];
-  
+
   // x must conform to a well known regex for headers, disallowing \r\n\0 characters.
   string x = 1 [(validate.rules).string {well_known_regex: HTTP_HEADER_VALUE, strict: false}];
   ```
